@@ -1,0 +1,568 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/27/2018 10:26:52 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ALYAN-1"
+  DTS:CreatorName="ALESGROUPE\lyan"
+  DTS:DTSID="{6068FBEB-521B-4C7A-A195-4127CF1B0BA4}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3008.28"
+  DTS:LocaleID="1036"
+  DTS:ObjectName="FRANCHISE"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{7120DE2F-75CA-4F71-AA08-EDBEEB00F41D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[srv-dynasys.alesgroupe.com.ITF_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BE42D208-65BE-4AC5-BC71-928A82590E7C}"
+      DTS:ObjectName="srv-dynasys.alesgroupe.com.ITF_Test">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=srv-dynasys.alesgroupe.com;Initial Catalog=ITF_Test;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[srv-mdm.alesgroupe.com.01_MCD_AG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9E45D919-D904-4A45-8D07-3DF4D8D6BC3B}"
+      DTS:ObjectName="srv-mdm.alesgroupe.com.01_MCD_AG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=srv-mdm.alesgroupe.com;Initial Catalog=01_MCD_AG;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\SEQ Alimentation la table Franchise"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Conteneur de séquences"
+      DTS:DTSID="{a35c7409-3c2c-4ad5-8518-fb1761364c6a}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ Alimentation la table Franchise">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ Alimentation la table Franchise\Suppression de table NS_DS_FRANCHISE_TEMP"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tâche d'exécution de requêtes SQL"
+          DTS:DTSID="{101241dc-981c-4596-b353-e5f504334e0d}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Suppression de table NS_DS_FRANCHISE_TEMP"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{BE42D208-65BE-4AC5-BC71-928A82590E7C}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="DELETE FROM NS_DS_FRANCHISE_TEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tâche de flux de données"
+          DTS:DTSID="{557d1987-c45f-41bc-86d2-5edd16762de2}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tâche de flux de données"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destination OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+                  description="Destination OLE DB"
+                  name="Destination OLE DB"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowset">[dbo].[NS_DS_FRANCHISE_TEMP]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Commande SQL à exécuter."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le mode utilisé pour accéder à la base de données."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si les valeurs fournies pour les colonnes d'identité seront copiées à la destination. Si la valeur est définie à False, les valeurs des colonnes d'identité seront générées automatiquement à la destination. Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si les colonnes contenant la valeur NULL auront cette valeur NULL copiée à la destination. Si la valeur est définie à False, les colonnes contenant la valeur NULL auront leurs valeurs par défaut insérées à la destination. Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadKeepNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie les options à utiliser avec le chargement rapide.  Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie quand les validations sont émises pendant l'insertion des données.  Une valeur égale à 0 spécifie qu'une validation sera émise à la fin de l'insertion des données.  Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[srv-dynasys.alesgroupe.com.ITF_Test]"
+                      connectionManagerRefId="Package.ConnectionManagers[srv-dynasys.alesgroupe.com.ITF_Test]"
+                      description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]"
+                      errorOrTruncationOperation="Insérer"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrée de destination OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[ID_Secondary_Brand]"
+                          cachedDataType="i4"
+                          cachedName="ID_Secondary_Brand"
+                          externalMetadataColumnId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[MARQUE_SECONDAIRE_CODE]"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[ID_Secondary_Brand]" />
+                        <inputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[ID_Range]"
+                          cachedDataType="i4"
+                          cachedName="ID_Range"
+                          externalMetadataColumnId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[FRANCHISE_CODE]"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[ID_Range]" />
+                        <inputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[Lib_Range_Fr]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Lib_Range_Fr"
+                          externalMetadataColumnId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[FRANCHISE_LIB_1]"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[Lib_Range_Fr]" />
+                        <inputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[Lib_Range_En]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Lib_Range_En"
+                          externalMetadataColumnId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[FRANCHISE_LIB_2]"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[Lib_Range_En]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[MARQUE_SECONDAIRE_CODE]"
+                          dataType="wstr"
+                          length="255"
+                          name="MARQUE_SECONDAIRE_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[FRANCHISE_CODE]"
+                          dataType="wstr"
+                          length="255"
+                          name="FRANCHISE_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[FRANCHISE_LIB_1]"
+                          dataType="wstr"
+                          length="255"
+                          name="FRANCHISE_LIB_1" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[FRANCHISE_LIB_2]"
+                          dataType="wstr"
+                          length="255"
+                          name="FRANCHISE_LIB_2" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de destination OLE DB"
+                      synchronousInputId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Source OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;7"
+                  description="Source OLE DB"
+                  name="Source OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowset">[dbo].[ST_Range]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Commande SQL à exécuter."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="Variable contenant la commande SQL à exécuter."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le mode utilisé pour accéder à la base de données."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Mappages entre les paramètres de la commande SQL et les variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[srv-mdm.alesgroupe.com.01_MCD_AG]"
+                      connectionManagerRefId="Package.ConnectionManagers[srv-mdm.alesgroupe.com.01_MCD_AG]"
+                      description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB]"
+                      name="Sortie de source OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[ID_Secondary_Brand]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[ID_Secondary_Brand]"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[ID_Secondary_Brand]"
+                          name="ID_Secondary_Brand"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[ID_Range]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[ID_Range]"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[ID_Range]"
+                          name="ID_Range"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[Lib_Range_Fr]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Lib_Range_Fr]"
+                          length="50"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[Lib_Range_Fr]"
+                          name="Lib_Range_Fr"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[Lib_Range_En]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Lib_Range_En]"
+                          length="50"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[Lib_Range_En]"
+                          name="Lib_Range_En"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[ID_Secondary_Brand]"
+                          dataType="i4"
+                          name="ID_Secondary_Brand" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[ID_Range]"
+                          dataType="i4"
+                          name="ID_Range" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Cod_Range]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Cod_Range" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Lib_Range_Fr]"
+                          dataType="wstr"
+                          length="50"
+                          name="Lib_Range_Fr" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Lib_Range_En]"
+                          dataType="wstr"
+                          length="50"
+                          name="Lib_Range_En" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Flg_Activity_Range]"
+                          dataType="bool"
+                          name="Flg_Activity_Range" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Datcre_Range]"
+                          dataType="dbTimeStamp"
+                          name="Datcre_Range" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Usrcre_Range]"
+                          dataType="wstr"
+                          length="40"
+                          name="Usrcre_Range" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Datmod_Range]"
+                          dataType="dbTimeStamp"
+                          name="Datmod_Range" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[Usrmod_Range]"
+                          dataType="wstr"
+                          length="40"
+                          name="Usrmod_Range" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB]"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de source OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_Range]"
+                          dataType="i4"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_Range]"
+                          name="ID_Range" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_Secondary_Brand]"
+                          dataType="i4"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_Secondary_Brand]"
+                          name="ID_Secondary_Brand" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[Lib_Range_Fr]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[Lib_Range_Fr]"
+                          name="Lib_Range_Fr" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[Lib_Range_En]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[Lib_Range_En]"
+                          name="Lib_Range_En" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données.Paths[Sortie de source OLE DB]"
+                  endId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]"
+                  name="Sortie de source OLE DB"
+                  startId="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SEQ Alimentation la table Franchise.PrecedenceConstraints[Contrainte]"
+          DTS:CreationName=""
+          DTS:DTSID="{5cc4352c-9e6b-407d-8e28-b2b635e42130}"
+          DTS:From="Package\SEQ Alimentation la table Franchise\Suppression de table NS_DS_FRANCHISE_TEMP"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Contrainte"
+          DTS:To="Package\SEQ Alimentation la table Franchise\Tâche de flux de données" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Cette section CDATA contient des informations sur la disposition du package. Elle comprend des informations telles que les coordonnées (x,y), la largeur et la hauteur.-->
+<!--Si vous modifiez manuellement cette section et commettez une erreur, vous pouvez la supprimer. -->
+<!--Le package pourra toujours se charger normalement, mais les informations de disposition précédente seront perdues et le concepteur réorganisera automatiquement les éléments sur l'aire de conception.-->
+<Objects
+  Version="8">
+  <!--Chaque nœud ci-dessous contiendra des propriétés qui n'affectent pas le comportement d'exécution.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="304.8,41.6"
+          Id="Package\SEQ Alimentation la table Franchise\Suppression de table NS_DS_FRANCHISE_TEMP"
+          TopLeft="53.942860840778,27.7647070234623" />
+        <NodeLayout
+          Size="200,41.6"
+          Id="Package\SEQ Alimentation la table Franchise\Tâche de flux de données"
+          TopLeft="107.771432463977,137.647061483258" />
+        <EdgeLayout
+          Id="Package\SEQ Alimentation la table Franchise.PrecedenceConstraints[Contrainte]"
+          TopLeft="207.057146652377,69.3647070234623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.2823544597954"
+              Start="0,0"
+              End="0,60.7823544597954">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.7823544597954" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="422.4,230.4"
+          Size="422.4,273.6"
+          Id="Package\SEQ Alimentation la table Franchise"
+          TopLeft="106.285715073955,52.0470587119924" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\SEQ Alimentation la table Franchise\Tâche de flux de données">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB"
+          TopLeft="213.485712076693,230.917647290477" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB"
+          TopLeft="229.028569307133,48.7058817008787" />
+        <EdgeLayout
+          Id="Package\SEQ Alimentation la table Franchise\Tâche de flux de données.Paths[Sortie de source OLE DB]"
+          TopLeft="301.257140691913,90.3058817008788">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,140.611765589599"
+              Start="0,0"
+              End="0,133.111765589599">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,133.111765589599" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Destination OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SEQ Alimentation la table Franchise\Tâche de flux de données\Source OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1669 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/21/2018 4:41:43 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ALYAN-1"
+  DTS:CreatorName="ALESGROUPE\lyan"
+  DTS:DTSID="{E57F02D2-A905-47A7-829B-B65492B64546}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3008.28"
+  DTS:LocaleID="1036"
+  DTS:ObjectName="PAYS"
+  DTS:PackageType="5"
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{7CCA1751-8208-4FBE-9B94-997FD3FCE854}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gestionnaire de connexions Excel 2]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{3E58A3AB-D343-4088-A50B-C0D08576F130}"
+      DTS:ObjectName="Gestionnaire de connexions Excel 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\lyan\Desktop\Country.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gestionnaire de connexions SMTP]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{9EEED644-8C20-4A70-8291-F6D4797F7854}"
+      DTS:ObjectName="Gestionnaire de connexions SMTP">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=srv-exch-13.alesgroupe.com;UseWindowsAuthentication=True;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[srv-dynasys.alesgroupe.com.ITF_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0728816B-E15C-4CCF-AB99-13BD0A19845D}"
+      DTS:ObjectName="srv-dynasys.alesgroupe.com.ITF_Test">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=srv-dynasys.alesgroupe.com;Initial Catalog=ITF_Test;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[srv-mdm.alesgroupe.com.01_MCD_AG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{38B4ADC6-14F1-48B2-82BB-D34371096B0E}"
+      DTS:ObjectName="srv-mdm.alesgroupe.com.01_MCD_AG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=srv-mdm.alesgroupe.com;Initial Catalog=01_MCD_AG;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="11"
+      DTS:DTSID="{3BE00F67-6D1B-4EA6-BFCE-91C1AE322E89}"
+      DTS:ObjectName="TCheEnvoyerUnMessage_DebugMode">
+      <DTS:Property
+        DTS:DataType="11"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\SEQ alimentation la table pays"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Conteneur de séquences"
+      DTS:DTSID="{BD9BE40C-DD2A-4F79-BC29-5545E43CA3D8}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ alimentation la table pays">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ alimentation la table pays\Suppression table NS_DS_PAYS_TEMP"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Suppression table NS_DS_PAYS_TEMP"
+          DTS:DTSID="{572A7FF8-1A9D-49EB-ACE3-6F355864D6E4}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Suppression table NS_DS_PAYS_TEMP"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{0728816B-E15C-4CCF-AB99-13BD0A19845D}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="DELETE FROM NS_DS_PAYS_TEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ alimentation la table pays\Tâche d'exécution de requêtes SQL"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tâche d'exécution de requêtes SQL"
+          DTS:DTSID="{C37F52A1-C335-4C1B-BAD3-CA7BBA22B964}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tâche d'exécution de requêtes SQL"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{0728816B-E15C-4CCF-AB99-13BD0A19845D}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="UPDATE NS_DS_PAYS_TEMP&#xA;SET          MARCHE_CODE = (CASE WHEN PAYS_CODE = 250 THEN 101 WHEN PAYS_CODE != 250 THEN 102 END)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ alimentation la table pays\Tâche de flux de données"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tâche de flux de données"
+          DTS:DTSID="{A3B9D0C2-9683-48DD-B6A9-DB63C532C86A}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tâche de flux de données"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Conversion de données;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;0"
+                  description="Conversion de données"
+                  name="Conversion de données"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données]"
+                      name="Entrée de conversion de données">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données].Columns[ID_ISO3166_Country]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="ID_ISO3166_Country"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO3166_Country]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données]"
+                      exclusionGroup="1"
+                      name="Sortie de conversion de données"
+                      synchronousInputId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO3166_Country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO3166_Country]"
+                          name="Copie de ID_ISO3166_Country"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie la colonne d'entrée utilisée comme source de données pour la conversion."
+                              name="SourceInputColumnLineageID">#{Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO3166_Country]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indique si la colonne utilise les routines d'analyse les plus rapides, avec des paramètres régionaux neutres."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de conversion de données"
+                      synchronousInputId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Conversion de données;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;0"
+                  description="Conversion de données"
+                  name="Conversion de données 1"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Inputs[Entrée de conversion de données]"
+                      name="Entrée de conversion de données">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Inputs[Entrée de conversion de données].Columns[ID_ISO3166_Country]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="ID_ISO3166_Country"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO3166_Country]" />
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Inputs[Entrée de conversion de données].Columns[ID_ISO4217_Currency]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="ID_ISO4217_Currency"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO4217_Currency]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données]"
+                      exclusionGroup="1"
+                      name="Sortie de conversion de données"
+                      synchronousInputId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Inputs[Entrée de conversion de données]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO3166_Country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO3166_Country]"
+                          name="Copie de ID_ISO3166_Country"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie la colonne d'entrée utilisée comme source de données pour la conversion."
+                              name="SourceInputColumnLineageID">#{Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO3166_Country]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indique si la colonne utilise les routines d'analyse les plus rapides, avec des paramètres régionaux neutres."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO4217_Currency]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO4217_Currency]"
+                          name="Copie de ID_ISO4217_Currency"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie la colonne d'entrée utilisée comme source de données pour la conversion."
+                              name="SourceInputColumnLineageID">#{Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO4217_Currency]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indique si la colonne utilise les routines d'analyse les plus rapides, avec des paramètres régionaux neutres."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie d'erreur de conversion de données]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de conversion de données"
+                      synchronousInputId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Inputs[Entrée de conversion de données]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destination OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+                  description="Destination OLE DB"
+                  name="Destination OLE DB"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowset">[dbo].[NS_DS_PAYS_TEMP]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Commande SQL à exécuter."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le mode utilisé pour accéder à la base de données."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si les valeurs fournies pour les colonnes d'identité seront copiées à la destination. Si la valeur est définie à False, les valeurs des colonnes d'identité seront générées automatiquement à la destination. Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si les colonnes contenant la valeur NULL auront cette valeur NULL copiée à la destination. Si la valeur est définie à False, les colonnes contenant la valeur NULL auront leurs valeurs par défaut insérées à la destination. Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadKeepNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie les options à utiliser avec le chargement rapide.  Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie quand les validations sont émises pendant l'insertion des données.  Une valeur égale à 0 spécifie qu'une validation sera émise à la fin de l'insertion des données.  Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[srv-dynasys.alesgroupe.com.ITF_Test]"
+                      connectionManagerRefId="Package.ConnectionManagers[srv-dynasys.alesgroupe.com.ITF_Test]"
+                      description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]"
+                      errorOrTruncationOperation="Insérer"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrée de destination OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[Lib_ISO3166_Country_FR]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Lib_ISO3166_Country_FR"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PAYS_LIB_1]"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Lib_ISO3166_Country_FR]" />
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[Lib_ISO3166_Country_EN]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Lib_ISO3166_Country_EN"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PAYS_LIB_2]"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Lib_ISO3166_Country_EN]" />
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[Copie de ID_ISO3166_Country]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="Copie de ID_ISO3166_Country"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PAYS_CODE]"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Copie de ID_ISO3166_Country]" />
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[Copie de ID_ISO4217_Currency]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="Copie de ID_ISO4217_Currency"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[DEVISE_CODE]"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Copie de ID_ISO4217_Currency]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PAYS_CODE]"
+                          dataType="wstr"
+                          length="255"
+                          name="PAYS_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PAYS_LIB_1]"
+                          dataType="wstr"
+                          length="255"
+                          name="PAYS_LIB_1" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PAYS_LIB_2]"
+                          dataType="wstr"
+                          length="255"
+                          name="PAYS_LIB_2" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[MARCHE_CODE]"
+                          dataType="wstr"
+                          length="255"
+                          name="MARCHE_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[DEVISE_CODE]"
+                          dataType="wstr"
+                          length="255"
+                          name="DEVISE_CODE" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de destination OLE DB"
+                      synchronousInputId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Jointure de fusion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+                  description="Combine deux flux de données triés en un seul à l'aide de la jointure FULL, LEFT ou INNER. Nous recommandons cette transformation lorsque les flux de données peuvent être triés au niveau de leurs sources."
+                  name="Jointure de fusion"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le type de jointure à effectuer."
+                      name="JoinType"
+                      typeConverter="JoinType">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le nombre de colonnes dans la clé de tri."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si les valeurs NULL sont traitées comme valeurs égales."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indique le nombre maximal de mémoires tampons demandées par entrée avant blocage."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion]"
+                      hasSideEffects="true"
+                      name="Entrée gauche de jointure de fusion">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[Copie de ID_ISO3166_Country]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="Copie de ID_ISO3166_Country"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Copie de ID_ISO3166_Country]" />
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[Lib_ISO3166_Country_EN]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Lib_ISO3166_Country_EN"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Lib_ISO3166_Country_EN]" />
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[Lib_ISO3166_Country_FR]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Lib_ISO3166_Country_FR"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Lib_ISO3166_Country_FR]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion]"
+                      hasSideEffects="true"
+                      name="Entrée droite de jointure de fusion">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[Copie de ID_ISO3166_Country]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="Copie de ID_ISO3166_Country"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Outputs[Sortie de tri].Columns[Copie de ID_ISO3166_Country]" />
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[Copie de ID_ISO4217_Currency]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="Copie de ID_ISO4217_Currency"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Outputs[Sortie de tri].Columns[Copie de ID_ISO4217_Currency]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion]"
+                      isSorted="true"
+                      name="Sortie de jointure de fusion">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Copie de ID_ISO3166_Country]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Copie de ID_ISO3166_Country]"
+                          name="Copie de ID_ISO3166_Country"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Colonne d'entrée associée à cette colonne de sortie"
+                              name="InputColumnID">#{Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[Copie de ID_ISO3166_Country]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Lib_ISO3166_Country_EN]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Lib_ISO3166_Country_EN]"
+                          name="Lib_ISO3166_Country_EN">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Colonne d'entrée associée à cette colonne de sortie"
+                              name="InputColumnID">#{Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[Lib_ISO3166_Country_EN]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Lib_ISO3166_Country_FR]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Lib_ISO3166_Country_FR]"
+                          name="Lib_ISO3166_Country_FR">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Colonne d'entrée associée à cette colonne de sortie"
+                              name="InputColumnID">#{Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[Lib_ISO3166_Country_FR]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Copie de ID_ISO4217_Currency]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[Copie de ID_ISO4217_Currency]"
+                          name="Copie de ID_ISO4217_Currency">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Colonne d'entrée associée à cette colonne de sortie"
+                              name="InputColumnID">#{Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[Copie de ID_ISO4217_Currency]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Source OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;7"
+                  description="Source OLE DB"
+                  name="JT_ISO4217_Currency_ISO3166_Country"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowset">[dbo].[JT_ISO4217_Currency_ISO3166_Country]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Commande SQL à exécuter."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="Variable contenant la commande SQL à exécuter."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le mode utilisé pour accéder à la base de données."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Mappages entre les paramètres de la commande SQL et les variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[srv-mdm.alesgroupe.com.01_MCD_AG]"
+                      connectionManagerRefId="Package.ConnectionManagers[srv-mdm.alesgroupe.com.01_MCD_AG]"
+                      description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB]"
+                      name="Sortie de source OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO3166_Country]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[ID_ISO3166_Country]"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO3166_Country]"
+                          name="ID_ISO3166_Country"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO4217_Currency]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[ID_ISO4217_Currency]"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO4217_Currency]"
+                          name="ID_ISO4217_Currency"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[ID_ISO3166_Country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="ID_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[ID_ISO4217_Currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="ID_ISO4217_Currency" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Flg_Devise_Facturation]"
+                          dataType="bool"
+                          name="Flg_Devise_Facturation" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Datcre_ISO4217_Currency_ISO3166_Country]"
+                          dataType="dbTimeStamp"
+                          name="Datcre_ISO4217_Currency_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Usrcre_ISO4217_Currency_ISO3166_Country]"
+                          dataType="wstr"
+                          length="40"
+                          name="Usrcre_ISO4217_Currency_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Datmod_ISO4217_Currency_ISO3166_Country]"
+                          dataType="dbTimeStamp"
+                          name="Datmod_ISO4217_Currency_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Usrmod_ISO4217_Currency_ISO3166_Country]"
+                          dataType="wstr"
+                          length="40"
+                          name="Usrmod_ISO4217_Currency_ISO3166_Country" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB]"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de source OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_ISO3166_Country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_ISO3166_Country]"
+                          name="ID_ISO3166_Country" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_ISO4217_Currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_ISO4217_Currency]"
+                          name="ID_ISO4217_Currency" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Source OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;7"
+                  description="Source OLE DB"
+                  name="ST_ISO3166_Country"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowset">[dbo].[ST_ISO3166_Country]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Commande SQL à exécuter."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="Variable contenant la commande SQL à exécuter."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le mode utilisé pour accéder à la base de données."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Mappages entre les paramètres de la commande SQL et les variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[srv-mdm.alesgroupe.com.01_MCD_AG]"
+                      connectionManagerRefId="Package.ConnectionManagers[srv-mdm.alesgroupe.com.01_MCD_AG]"
+                      description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB]"
+                      name="Sortie de source OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO3166_Country]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[ID_ISO3166_Country]"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[ID_ISO3166_Country]"
+                          name="ID_ISO3166_Country"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[Lib_ISO3166_Country_FR]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Lib_ISO3166_Country_FR]"
+                          length="50"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[Lib_ISO3166_Country_FR]"
+                          name="Lib_ISO3166_Country_FR"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[Lib_ISO3166_Country_EN]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Lib_ISO3166_Country_EN]"
+                          length="50"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[Lib_ISO3166_Country_EN]"
+                          name="Lib_ISO3166_Country_EN"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[ID_ISO3166_Country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="ID_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Cod_ISO3166_Country_Alpha2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="Cod_ISO3166_Country_Alpha2" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Cod_ISO3166_Country_Alpha3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="Cod_ISO3166_Country_Alpha3" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Lib_ISO3166_Country_FR]"
+                          dataType="wstr"
+                          length="50"
+                          name="Lib_ISO3166_Country_FR" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Lib_ISO3166_Country_EN]"
+                          dataType="wstr"
+                          length="50"
+                          name="Lib_ISO3166_Country_EN" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Flg_Activity_ISO3166_Country]"
+                          dataType="bool"
+                          name="Flg_Activity_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Datcre_ISO3166_Country]"
+                          dataType="dbTimeStamp"
+                          name="Datcre_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Usrcre_ISO3166_Country]"
+                          dataType="wstr"
+                          length="40"
+                          name="Usrcre_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Datmod_ISO3166_Country]"
+                          dataType="dbTimeStamp"
+                          name="Datmod_ISO3166_Country" />
+                        <externalMetadataColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].ExternalColumns[Usrmod_ISO3166_Country]"
+                          dataType="wstr"
+                          length="40"
+                          name="Usrmod_ISO3166_Country" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB]"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de source OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_ISO3166_Country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ID_ISO3166_Country]"
+                          name="ID_ISO3166_Country" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[Lib_ISO3166_Country_FR]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[Lib_ISO3166_Country_FR]"
+                          name="Lib_ISO3166_Country_FR" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[Lib_ISO3166_Country_EN]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[Lib_ISO3166_Country_EN]"
+                          name="Lib_ISO3166_Country_EN" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Trier;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+                  description="Trie les données d'entrée en ordre croissant ou décroissant lorsque le tri ne peut pas être effectué à la source. Par exemple, triez les données de vente par 'id de client' avant leur enregistrement dans un fichier plat et leur diffusion dans un autre service. Remarque : nous ne recommandons pas cette transformation dans le cas de flux de données volumineux."
+                  name="Trier"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si la transformation de tri supprime les lignes comportant des valeurs de tri en double."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le nombre maximal de threads à utiliser pour le tri."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Inputs[Entrée de tri]"
+                      name="Entrée de tri">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Inputs[Entrée de tri].Columns[Lib_ISO3166_Country_FR]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Lib_ISO3166_Country_FR"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[Lib_ISO3166_Country_FR]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie les options de comparaison pour les données caractères."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie l'ordre de tri de la colonne."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Inputs[Entrée de tri].Columns[Lib_ISO3166_Country_EN]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Lib_ISO3166_Country_EN"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[Lib_ISO3166_Country_EN]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie les options de comparaison pour les données caractères."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie l'ordre de tri de la colonne."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Inputs[Entrée de tri].Columns[Copie de ID_ISO3166_Country]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="Copie de ID_ISO3166_Country"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO3166_Country]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie les options de comparaison pour les données caractères."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie l'ordre de tri de la colonne."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri]"
+                      isSorted="true"
+                      name="Sortie de tri">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Lib_ISO3166_Country_FR]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Lib_ISO3166_Country_FR]"
+                          name="Lib_ISO3166_Country_FR">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie l'identificateur de lignage de la colonne d'entrée associé à cette colonne de sortie."
+                              name="SortColumnId">#{Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[Lib_ISO3166_Country_FR]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Lib_ISO3166_Country_EN]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Lib_ISO3166_Country_EN]"
+                          name="Lib_ISO3166_Country_EN">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie l'identificateur de lignage de la colonne d'entrée associé à cette colonne de sortie."
+                              name="SortColumnId">#{Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB].Columns[Lib_ISO3166_Country_EN]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Copie de ID_ISO3166_Country]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri].Columns[Copie de ID_ISO3166_Country]"
+                          name="Copie de ID_ISO3166_Country"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie l'identificateur de lignage de la colonne d'entrée associé à cette colonne de sortie."
+                              name="SortColumnId">#{Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO3166_Country]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Trier;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+                  description="Trie les données d'entrée en ordre croissant ou décroissant lorsque le tri ne peut pas être effectué à la source. Par exemple, triez les données de vente par 'id de client' avant leur enregistrement dans un fichier plat et leur diffusion dans un autre service. Remarque : nous ne recommandons pas cette transformation dans le cas de flux de données volumineux."
+                  name="Trier 1"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si la transformation de tri supprime les lignes comportant des valeurs de tri en double."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le nombre maximal de threads à utiliser pour le tri."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Inputs[Entrée de tri]"
+                      name="Entrée de tri">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Inputs[Entrée de tri].Columns[Copie de ID_ISO3166_Country]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="Copie de ID_ISO3166_Country"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO3166_Country]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie les options de comparaison pour les données caractères."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie l'ordre de tri de la colonne."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Inputs[Entrée de tri].Columns[Copie de ID_ISO4217_Currency]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="Copie de ID_ISO4217_Currency"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO4217_Currency]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie les options de comparaison pour les données caractères."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Spécifie l'ordre de tri de la colonne."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Outputs[Sortie de tri]"
+                      isSorted="true"
+                      name="Sortie de tri">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Outputs[Sortie de tri].Columns[Copie de ID_ISO3166_Country]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Outputs[Sortie de tri].Columns[Copie de ID_ISO3166_Country]"
+                          name="Copie de ID_ISO3166_Country"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie l'identificateur de lignage de la colonne d'entrée associé à cette colonne de sortie."
+                              name="SortColumnId">#{Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO3166_Country]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Outputs[Sortie de tri].Columns[Copie de ID_ISO4217_Currency]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Outputs[Sortie de tri].Columns[Copie de ID_ISO4217_Currency]"
+                          name="Copie de ID_ISO4217_Currency">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie l'identificateur de lignage de la colonne d'entrée associé à cette colonne de sortie."
+                              name="SortColumnId">#{Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données].Columns[Copie de ID_ISO4217_Currency]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de conversion de données]"
+                  endId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Inputs[Entrée de tri]"
+                  name="Sortie de conversion de données"
+                  startId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données]" />
+                <path
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de conversion de données1]"
+                  endId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Inputs[Entrée de tri]"
+                  name="Sortie de conversion de données"
+                  startId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Outputs[Sortie de conversion de données]" />
+                <path
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de jointure de fusion]"
+                  endId="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]"
+                  name="Sortie de jointure de fusion"
+                  startId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion]" />
+                <path
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de source OLE DB]"
+                  endId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données]"
+                  name="Sortie de source OLE DB"
+                  startId="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country.Outputs[Sortie de source OLE DB]" />
+                <path
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de source OLE DB1]"
+                  endId="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1.Inputs[Entrée de conversion de données]"
+                  name="Sortie de source OLE DB"
+                  startId="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country.Outputs[Sortie de source OLE DB]" />
+                <path
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de tri]"
+                  endId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion]"
+                  name="Sortie de tri"
+                  startId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier.Outputs[Sortie de tri]" />
+                <path
+                  refId="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de tri1]"
+                  endId="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion]"
+                  name="Sortie de tri"
+                  startId="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1.Outputs[Sortie de tri]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SEQ alimentation la table pays.PrecedenceConstraints[Contrainte]"
+          DTS:CreationName=""
+          DTS:DTSID="{222DD59A-2AA1-4292-AD2A-2E6637C4B510}"
+          DTS:From="Package\SEQ alimentation la table pays\Suppression table NS_DS_PAYS_TEMP"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Contrainte"
+          DTS:To="Package\SEQ alimentation la table pays\Tâche de flux de données" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SEQ alimentation la table pays.PrecedenceConstraints[Contrainte 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{96E8C36A-E315-49E2-A020-A3080DE3A919}"
+          DTS:From="Package\SEQ alimentation la table pays\Tâche de flux de données"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Contrainte 1"
+          DTS:To="Package\SEQ alimentation la table pays\Tâche d'exécution de requêtes SQL" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tâche Envoyer un message"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Tâche Envoyer un message"
+      DTS:DTSID="{AC9E0C1A-6BB9-4626-8FC9-E0FDFDB6342A}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tâche Envoyer un message"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="DebugMode">@[$Package::TCheEnvoyerUnMessage_DebugMode]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{9EEED644-8C20-4A70-8291-F6D4797F7854}"
+          SendMailTask:From="yanlin22077@gmail.com"
+          SendMailTask:To="yanlin22077@gmail.com"
+          SendMailTask:Subject="chargement de donées réussi"
+          SendMailTask:MessageSource="test" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Cette section CDATA contient des informations sur la disposition du package. Elle comprend des informations telles que les coordonnées (x,y), la largeur et la hauteur.-->
+<!--Si vous modifiez manuellement cette section et commettez une erreur, vous pouvez la supprimer. -->
+<!--Le package pourra toujours se charger normalement, mais les informations de disposition précédente seront perdues et le concepteur réorganisera automatiquement les éléments sur l'aire de conception.-->
+<Objects
+  Version="8">
+  <!--Chaque nœud ci-dessous contiendra des propriétés qui n'affectent pas le comportement d'exécution.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="244.8,41.6"
+          Id="Package\SEQ alimentation la table pays\Suppression table NS_DS_PAYS_TEMP"
+          TopLeft="37.1428607726583,10.729413171788" />
+        <NodeLayout
+          Size="200,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données"
+          TopLeft="44.5714319871397,84.0470606081214" />
+        <NodeLayout
+          Size="244.8,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche d'exécution de requêtes SQL"
+          TopLeft="42.2857176624999,158.400003062978" />
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays.PrecedenceConstraints[Contrainte]"
+          TopLeft="159.542860772658,52.329413171788">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14.9714287855186,31.7176474363334"
+              Start="0,0"
+              End="-14.9714287855186,24.2176474363334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.8588237181667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.8588237181667"
+                    Point2="0,15.8588237181667"
+                    Point3="-4,15.8588237181667" />
+                  <mssgle:LineSegment
+                    End="-10.9714287855186,15.8588237181667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10.9714287855186,15.8588237181667"
+                    Point2="-14.9714287855186,15.8588237181667"
+                    Point3="-14.9714287855186,19.8588237181667" />
+                  <mssgle:LineSegment
+                    End="-14.9714287855186,24.2176474363334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays.PrecedenceConstraints[Contrainte 1]"
+          TopLeft="144.57143198714,125.647060608121">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.1142856753602,32.7529424548561"
+              Start="0,0"
+              End="20.1142856753602,25.2529424548561">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.3764712274281" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.3764712274281"
+                    Point2="0,16.3764712274281"
+                    Point3="4,16.3764712274281" />
+                  <mssgle:LineSegment
+                    End="16.1142856753602,16.3764712274281" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.1142856753602,16.3764712274281"
+                    Point2="20.1142856753602,16.3764712274281"
+                    Point3="20.1142856753602,20.3764712274281" />
+                  <mssgle:LineSegment
+                    End="20.1142856753602,25.2529424548561" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="342.4,269.6"
+          Size="342.4,312.8"
+          Id="Package\SEQ alimentation la table pays"
+          TopLeft="156.000002656665,17.1294120049393" />
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Tâche Envoyer un message"
+          TopLeft="114.857144813148,356.658828531418" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\SEQ alimentation la table pays\Tâche de flux de données">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country"
+          TopLeft="156.34285716232,7.52941171322727" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données 1"
+          TopLeft="616,94.4" />
+        <NodeLayout
+          Size="100,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier"
+          TopLeft="297.59999993188,174.964705710758" />
+        <NodeLayout
+          Size="109.6,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données\Trier 1"
+          TopLeft="554.28571432464,170.352940850439" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB"
+          TopLeft="405.942857230439,317.97647042522" />
+        <NodeLayout
+          Size="272.8,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country"
+          TopLeft="573.6,11.2" />
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données\Conversion de données"
+          TopLeft="156.8,92.7058822843031" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données\Jointure de fusion"
+          TopLeft="408.914285811599,245.41176442275" />
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de source OLE DB1]"
+          TopLeft="711.2,52.8">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.6"
+              Start="0,0"
+              End="0,34.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de source OLE DB]"
+          TopLeft="247.37142858116,49.1294117132273">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.5764705710758"
+              Start="0,0"
+              End="0,36.0764705710758">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.0764705710758" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de jointure de fusion]"
+          TopLeft="490.628571521019,287.01176442275">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.9647060024697"
+              Start="0,0"
+              End="0,23.4647060024697">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.4647060024697" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de conversion de données1]"
+          TopLeft="712.4,136">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-103.31428567536,34.3529408504394"
+              Start="0,0"
+              End="-103.31428567536,26.8529408504394">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.1764704252197" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.1764704252197"
+                    Point2="0,17.1764704252197"
+                    Point3="-4,17.1764704252197" />
+                  <mssgle:LineSegment
+                    End="-99.3142856753602,17.1764704252197" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-99.3142856753602,17.1764704252197"
+                    Point2="-103.31428567536,17.1764704252197"
+                    Point3="-103.31428567536,21.1764704252197" />
+                  <mssgle:LineSegment
+                    End="-103.31428567536,26.8529408504394" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de conversion de données]"
+          TopLeft="248.4,134.305882284303">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99.1999999318805,40.6588234264544"
+              Start="0,0"
+              End="99.1999999318805,33.1588234264544">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.3294117132272" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.3294117132272"
+                    Point2="0,20.3294117132272"
+                    Point3="4,20.3294117132272" />
+                  <mssgle:LineSegment
+                    End="95.1999999318805,20.3294117132272" />
+                  <mssgle:CubicBezierSegment
+                    Point1="95.1999999318805,20.3294117132272"
+                    Point2="99.1999999318805,20.3294117132272"
+                    Point3="99.1999999318805,24.3294117132272" />
+                  <mssgle:LineSegment
+                    End="99.1999999318805,33.1588234264544" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de tri1]"
+          TopLeft="609.08571432464,211.952940850439">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-93.2380951797071,33.4588235723106"
+              Start="0,0"
+              End="-93.2380951797071,25.9588235723106">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.8794376151582" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.8794376151582"
+                    Point2="0,19.8794376151582"
+                    Point3="-4,19.8794376151582" />
+                  <mssgle:LineSegment
+                    End="-89.2380951797071,19.8794376151582" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-89.2380951797071,19.8794376151582"
+                    Point2="-93.2380951797071,19.8794376151582"
+                    Point3="-93.2380951797071,23.8794376151582" />
+                  <mssgle:LineSegment
+                    End="-93.2380951797071,25.9588235723106" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQ alimentation la table pays\Tâche de flux de données.Paths[Sortie de tri]"
+          TopLeft="347.59999993188,216.564705710758">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="116.780952546386,28.8470587119924"
+              Start="0,0"
+              End="116.780952546386,21.3470587119924">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.1393743957106" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.1393743957106"
+                    Point2="0,17.1393743957106"
+                    Point3="4,17.1393743957106" />
+                  <mssgle:LineSegment
+                    End="112.780952546386,17.1393743957106" />
+                  <mssgle:CubicBezierSegment
+                    Point1="112.780952546386,17.1393743957106"
+                    Point2="116.780952546386,17.1393743957106"
+                    Point3="116.780952546386,21.1393743957106" />
+                  <mssgle:LineSegment
+                    End="116.780952546386,21.3470587119924" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SEQ alimentation la table pays\Tâche de flux de données\ST_ISO3166_Country">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SEQ alimentation la table pays\Tâche de flux de données\Destination OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SEQ alimentation la table pays\Tâche de flux de données\JT_ISO4217_Currency_ISO3166_Country">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
